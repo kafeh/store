@@ -7,5 +7,8 @@ class CreateProductTypes < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+		
+		add_index :product_types, :deleted_at
+  
   end
 end
