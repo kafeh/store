@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: price_products
+#
+#  id         :bigint(8)        not null, primary key
+#  product_id :bigint(8)        not null
+#  price      :float            not null
+#  price_date :datetime         not null
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  price: 1.5
+  price_date: 2019-05-05 17:40:41
+
+two:
+  product: two
+  price: 1.5
+  price_date: 2019-05-05 17:40:41

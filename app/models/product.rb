@@ -5,7 +5,6 @@
 #  id              :bigint(8)        not null, primary key
 #  name            :string           not null
 #  product_type_id :bigint(8)        not null
-#  price           :float            not null
 #  likes           :integer          default(0)
 #  deleted_at      :datetime
 #  stock           :integer          default(0)
