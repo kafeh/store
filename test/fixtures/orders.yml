@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: orders
+#
+#  id         :bigint(8)        not null, primary key
+#  users_id   :bigint(8)        not null
+#  order_date :datetime         not null
+#  total      :float            not null
+#  deleted_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  order_date: 2019-05-04 23:38:01
+  total: 
+  deleted_at: 2019-05-04 23:38:01
+
+two:
+  user: two
+  order_date: 2019-05-04 23:38:01
+  total: 
+  deleted_at: 2019-05-04 23:38:01
