@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.float :price, null: false
       t.integer :likes, default: 0
       t.datetime :deleted_at
+      t.integer :stock, default: 0
 
       t.timestamps
     end

@@ -7,11 +7,7 @@ end
 end
 
 100.times do
-	Product.create(name: Faker::Dessert.topping, product_type_id: rand(1..10),  price: Faker::Number.decimal(2, 2), likes: rand(1..20))
-end
-
-10.times do
-	Stock.create(product_id: rand(1..50), quantity: rand(10..50))
+	Product.create(name: Faker::Dessert.topping, product_type_id: rand(1..10),  price: Faker::Number.decimal(2, 2), likes: rand(1..20), stock: rand(1..50))
 end
 
 30.times do
