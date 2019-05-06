@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
+	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price]
 
 	def index
