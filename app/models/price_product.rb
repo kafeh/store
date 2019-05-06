@@ -12,5 +12,14 @@
 #
 
 class PriceProduct < ApplicationRecord
+	acts_as_paranoid
+
+	before_create :set_price_date
+
   belongs_to :product
+
+  def set_price_date
+  	self.price_date = DateTime.now
+  end
+  
 end

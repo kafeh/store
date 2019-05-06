@@ -16,4 +16,5 @@ class Product < ApplicationRecord
 	acts_as_paranoid
 	
   belongs_to :product_type
+  has_many :price_products
 end

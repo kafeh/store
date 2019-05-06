@@ -1,17 +1,26 @@
 Rails.application.routes.draw do
- 
- namespace :api do
 
-  namespace :v1 do
+  namespace :api do
 
-  	resources :product_types
+    namespace :v1 do
 
-  	resources :users
+      resources :product_types
 
-  	resources :products
-  	
+      resources :users
+
+      resources :products  do
+
+        member do
+
+          post 'set_price'
+          get 'get_price'
+
+  		  end
+
+      end
+  
+    end
+
   end
-
- end
 
 end
