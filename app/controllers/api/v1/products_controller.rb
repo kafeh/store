@@ -15,7 +15,7 @@ class Api::V1::ProductsController < ApplicationController
 		if product.save
 			render json: product, status: :created, location: api_v1_product_url(product)
 		else
-			render json: product.errors, status: :unprocessable_entity
+			render json: { errors: product.errors }, status: :unprocessable_entity
 		end
 	end
 
@@ -23,7 +23,7 @@ class Api::V1::ProductsController < ApplicationController
 		if @product.update(product_params)
 			render json: @product, status: :ok
 		else
-			render json: @product.errors, status: :unprocessable_entity
+			render json: { errors: @product.errors }, status: :unprocessable_entity
 		end
 	end
 
@@ -37,7 +37,7 @@ class Api::V1::ProductsController < ApplicationController
 		if price_product.save
 			render json: price_product, status: :created, location: api_v1_product_url(@product)
 		else
-			render json: product.errors, status: :unprocessable_entity
+			render json: { errors: product.errors }, status: :unprocessable_entity
 		end
 	end
 

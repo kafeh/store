@@ -2,13 +2,14 @@
 #
 # Table name: users
 #
-#  id         :bigint(8)        not null, primary key
-#  name       :string           not null
-#  email      :string           not null
-#  phone      :string
-#  deleted_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint(8)        not null, primary key
+#  name            :string           not null
+#  email           :string           not null
+#  phone           :string
+#  deleted_at      :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
 #
 
 require 'test_helper'

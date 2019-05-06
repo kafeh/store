@@ -3,7 +3,7 @@
 end
 
 20.times do
-	User.create(name: Faker::Name.name, email: Faker::Internet.email)
+	User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "123456789")
 end
 
 100.times do

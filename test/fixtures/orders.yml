@@ -9,7 +9,7 @@
 #  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default(0)
+#  status     :integer          default("active")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
