@@ -9,6 +9,7 @@
 #  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :integer          default(0)
 #
 
 class Order < ApplicationRecord
@@ -16,4 +17,6 @@ class Order < ApplicationRecord
 
   belongs_to :user
   has_many :order_items
+
+  enum status: [:active, :finished]
 end
