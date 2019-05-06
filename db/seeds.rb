@@ -11,13 +11,13 @@ end
 end
 
 100.times do
-	PriceProduct.create(price: Faker::Number.decimal(2, 2), product_id: rand(1..100), price_date: DateTime.now)
+	PriceProduct.create(price: Faker::Number.decimal(2, 2), product_id: rand(1..100))
 end
 
-30.times do
-	Order.create(user_id: rand(1..20), order_date: Faker::Date.backward(14), total: Faker::Number.decimal(2, 2))
-end
+# 30.times do
+# 	Order.create(user_id: rand(1..20))
+# end
 
-100.times do
-	OrderItem.create(order_id: rand(1..30), product_id: rand(1..100), quantity: rand(1..10), total: Faker::Number.decimal(2, 2))
-end
+# 100.times do
+# 	OrderItem.create(order_id: rand(1..30), product_id: rand(1..100), quantity: rand(1..10), total: Faker::Number.decimal(2, 2))
+# end

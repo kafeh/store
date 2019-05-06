@@ -9,10 +9,9 @@ Rails.application.routes.draw do
       resources :products  do
 
         member do
-
           post 'set_price'
           get 'get_price'
-
+          post 'add_item'
         end
 
       end

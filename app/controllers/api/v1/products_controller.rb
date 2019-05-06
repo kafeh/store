@@ -1,5 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
 	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
+	before_action :user_authorize_request, only: [:add_item]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price]
 
 	def index
@@ -43,8 +44,18 @@ class Api::V1::ProductsController < ApplicationController
 	end
 
 	def get_price
-		price_product = @product.price_products.order('price_date DESC').first.price
+		price_product = @product.get_price
 		render json: { "price": price_product }, status: :ok
+	end
+
+	def add_item
+		if @current_user.order.active.any?
+			order = @current_user.order.active.first
+		else
+			order = @current_user.order.create
+
+		end
+
 	end
 
 	private

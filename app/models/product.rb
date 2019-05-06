@@ -17,4 +17,8 @@ class Product < ApplicationRecord
 	
   belongs_to :product_type
   has_many :price_products
+
+  def get_price
+  	self.price_products.order("created_at DESC").first.price
+  end
 end

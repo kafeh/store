@@ -4,19 +4,26 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  user_id    :bigint(8)        not null
-#  order_date :datetime         not null
 #  total      :float            not null
 #  deleted_at :datetime
+#  status     :integer          default("active"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default("active")
 #
 
 class Order < ApplicationRecord
 	acts_as_paranoid
 
-  belongs_to :user
-  has_many :order_items
+	belongs_to :user
+	has_many :order_items
 
-  enum status: [:active, :finished]
+	before_create :check_active_orders
+
+	enum status: [:active, :finished, :canceled]
+
+	def check_active_orders
+		self.user.orders.active.each do |order|
+			order.really_destroy!
+		end
+	end
 end

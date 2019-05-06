@@ -6,7 +6,7 @@
 #  order_id   :bigint(8)        not null
 #  product_id :bigint(8)        not null
 #  quantity   :integer          not null
-#  total      :float            not null
+#  total      :float            default(0.0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

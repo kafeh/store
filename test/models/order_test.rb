@@ -4,12 +4,11 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  user_id    :bigint(8)        not null
-#  order_date :datetime         not null
 #  total      :float            not null
 #  deleted_at :datetime
+#  status     :integer          default("active"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  status     :integer          default("active")
 #
 
 require 'test_helper'
