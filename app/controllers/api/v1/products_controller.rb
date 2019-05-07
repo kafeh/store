@@ -4,7 +4,7 @@ class Api::V1::ProductsController < ApplicationController
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :add_like]
 
 	def index
-		products = Product.available.order('updated_at desc')
+		products = Product.available.paginate(page: params[:page], per_page: 20).order('updated_at desc')
 		render json: products, status: :ok
 	end
 
@@ -49,7 +49,7 @@ class Api::V1::ProductsController < ApplicationController
 	end
 
 	def search_by_name
-		products = Product.available.search_by_name(params[:name]).order('updated_at desc')
+		products = Product.available.search_by_name(params[:name]).paginate(page: params[:page], per_page: 20).order('updated_at desc')
 		render json: products, status: :ok
 	end
 
