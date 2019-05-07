@@ -21,4 +21,5 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
 	has_many :orders	
+	has_many :like_products
 end

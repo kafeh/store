@@ -1,6 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
 	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
-	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :like]
+	before_action :user_authorize_request, only: [:add_like]
+	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :add_like]
 
 	def index
 		products = Product.available.order('updated_at desc')
@@ -50,6 +51,15 @@ class Api::V1::ProductsController < ApplicationController
 	def search_by_name
 		products = Product.available.search_by_name(params[:name]).order('updated_at desc')
 		render json: products, status: :ok
+	end
+
+	def add_like
+		like = @product.like_products.new(user_id: @current_user.id)
+		if like.save
+			render json: like, status: :created
+		else
+			render json: { errors: like.errors }, status: :unprocessable_entity
+		end
 	end
 
 	private

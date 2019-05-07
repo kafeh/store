@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         member do
           post 'set_price'
           get 'get_price'
+          get 'add_like'
         end
 
         collection do
