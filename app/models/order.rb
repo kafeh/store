@@ -19,11 +19,28 @@ class Order < ApplicationRecord
 
 	before_create :check_active_orders
 
-	enum status: [:active, :finished, :canceled]
+	enum status: [:active, :finished]
 
 	def check_active_orders
 		self.user.orders.active.each do |order|
 			order.really_destroy!
 		end
 	end
+
+	def set_total
+		self.total = self.order_items.sum(:total)
+		self.save
+	end
+
+	def update_stock
+		self.order_items.each do |item|
+			if item.check_stock
+				item.product.stock -= item.quantity  
+				item.product.save
+			else
+				item.destroy
+			end
+		end
+	end
+
 end

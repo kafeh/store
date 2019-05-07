@@ -1,7 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
 	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
-	before_action :user_authorize_request, only: [:add_item]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price]
+	
 
 	def index
 		products = Product.all.order('updated_at desc')
@@ -48,16 +48,6 @@ class Api::V1::ProductsController < ApplicationController
 		render json: { "price": price_product }, status: :ok
 	end
 
-	def add_item
-		if @current_user.order.active.any?
-			order = @current_user.order.active.first
-		else
-			order = @current_user.order.create
-
-		end
-
-	end
-
 	private
 
 	def set_product
@@ -68,7 +58,4 @@ class Api::V1::ProductsController < ApplicationController
 		params.require(:product).permit(:name, :product_type_id, :price, :stock)
 	end
 
-	def price_product_params
-		params.require(:price_product).permit(:price)
-	end
 end

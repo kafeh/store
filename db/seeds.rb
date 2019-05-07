@@ -10,8 +10,8 @@ end
 	Product.create(name: Faker::Dessert.topping, product_type_id: rand(1..10), likes: rand(1..20), stock: rand(1..50))
 end
 
-100.times do
-	PriceProduct.create(price: Faker::Number.decimal(2, 2), product_id: rand(1..100))
+100.times do |index|
+	PriceProduct.create(price: Faker::Number.decimal(2, 2), product_id: index)
 end
 
 # 30.times do
