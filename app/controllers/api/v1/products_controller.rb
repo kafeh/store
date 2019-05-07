@@ -4,7 +4,7 @@ class Api::V1::ProductsController < ApplicationController
 	
 
 	def index
-		products = Product.all.order('updated_at desc')
+		products = Product.where('stock > 0').order('updated_at desc')
 		render json: products, status: :ok
 	end
 
