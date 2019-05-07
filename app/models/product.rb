@@ -13,12 +13,16 @@
 #
 
 class Product < ApplicationRecord
+	include PgSearch
 	acts_as_paranoid
-	
-  belongs_to :product_type
-  has_many :price_products
 
-  def get_price
-  	self.price_products.order("created_at DESC").first.price
-  end
+	pg_search_scope :search_by_name, against: :name, using: { tsearch: { prefix: true, any_word: true} }
+	scope :available, -> {where('stock > 0')}
+
+	belongs_to :product_type
+	has_many :price_products
+
+	def get_price
+		self.price_products.order("created_at DESC").first.price
+	end
 end

@@ -4,17 +4,20 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :product_types
       resources :products  do
-
         member do
           post 'set_price'
           get 'get_price'
+        end
+
+        collection do
+          get 'search_by_name/:name', to: 'products#search_by_name'
         end
       end
 
       resources :orders, only: [:show] do 
         collection do
           patch 'buy'
-          delete 'destroy_item/:order_item_id' => 'orders#destroy_item'
+          delete 'destroy_item/:order_item_id', to: 'orders#destroy_item'
           post 'add_item'
         end
       end      

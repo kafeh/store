@@ -1,10 +1,9 @@
 class Api::V1::ProductsController < ApplicationController
 	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
-	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price]
-	
+	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :like]
 
 	def index
-		products = Product.where('stock > 0').order('updated_at desc')
+		products = Product.available.order('updated_at desc')
 		render json: products, status: :ok
 	end
 
@@ -46,6 +45,11 @@ class Api::V1::ProductsController < ApplicationController
 	def get_price
 		price_product = @product.get_price
 		render json: { "price": price_product }, status: :ok
+	end
+
+	def search_by_name
+		products = Product.available.search_by_name(params[:name]).order('updated_at desc')
+		render json: products, status: :ok
 	end
 
 	private
