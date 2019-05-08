@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :orders, only: [:show] do 
+      resources :orders, only: [:index, :show] do 
         collection do
           patch 'buy'
           delete 'destroy_item/:order_item_id', to: 'orders#destroy_item'

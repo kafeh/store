@@ -1,8 +1,16 @@
 class Api::V1::OrdersController < ApplicationController
+	include Orderable
+
 	before_action :user_authorize_request, only: [:add_item, :destroy_item, :buy]
+	before_action :admin_authorize_request, only: [:index]
 	before_action :set_or_create_order, only: [:add_item, :buy]
 	before_action :set_order_by_id, only: [:show]
 	before_action :set_order_item, only: [:destroy_item]
+
+	def index
+		orders = Order.order(ordering_params(params)).paginate(page: params[:page], per_page: 20)
+		render json: orders, status: :ok
+	end
 
 	def show
 		render json: @order, status: :ok

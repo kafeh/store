@@ -1,10 +1,12 @@
 class Api::V1::ProductsController < ApplicationController
+	include Orderable
+
 	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
 	before_action :user_authorize_request, only: [:add_like]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :add_like]
 
 	def index
-		products = Product.available.paginate(page: params[:page], per_page: 20).order('updated_at desc')
+		products = Product.available.order(ordering_params(params)).paginate(page: params[:page], per_page: 20)
 		render json: products, status: :ok
 	end
 
