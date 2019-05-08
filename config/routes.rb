@@ -19,6 +19,10 @@ Rails.application.routes.draw do
         collection do
           patch 'buy'
         end
+
+        member do
+          get 'log'
+        end
       end  
 
       resources :order_items, only: [:create, :destroy, :update]    
