@@ -3,7 +3,7 @@ class Api::V1::ProductsController < ApplicationController
 
 	before_action :admin_authorize_request, only: [:create, :destroy, :update, :set_price]
 	before_action :user_authorize_request, only: [:add_like]
-	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :add_like]
+	before_action :set_product, only: [:show, :update, :destroy, :set_price, :add_like]
 
 	def index
 		products = Product.available.order(ordering_params(params)).paginate(page: params[:page], per_page: 20)
@@ -11,7 +11,7 @@ class Api::V1::ProductsController < ApplicationController
 	end
 
 	def show
-		render json: @product, status: :ok
+		render json: { "product": @product, "price": @product.get_price }, status: :ok
 	end
 
 	def create
@@ -45,11 +45,6 @@ class Api::V1::ProductsController < ApplicationController
 		end
 	end
 
-	def get_price
-		price_product = @product.get_price
-		render json: { "price": price_product }, status: :ok
-	end
-
 	def search_by_name
 		products = Product.available.search_by_name(params[:name]).paginate(page: params[:page], per_page: 20).order('updated_at desc')
 		render json: products, status: :ok
@@ -67,11 +62,19 @@ class Api::V1::ProductsController < ApplicationController
 	private
 
 	def set_product
-		@product = Product.find(params[:id])
+		begin
+			@product = Product.find(params[:id])
+		rescue ActiveRecord::RecordNotFound
+			render json: { errors: 'Product not found' }, status: :not_found
+		end
 	end
 
 	def product_params
-		params.require(:product).permit(:name, :product_type_id, :price, :stock)
+		params.require(:product).permit(:name, :product_type_id, :stock)
+	end
+
+	def price_product_params
+		params.require(:price_product).permit(:price)
 	end
 
 end

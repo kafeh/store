@@ -41,7 +41,11 @@ class Api::V1::OrderItemsController < ApplicationController
 	end
 
 	def set_order_item
-		@order_item = OrderItem.find(params[:id])
+		begin
+			@order_item = OrderItem.find(params[:id])
+		rescue ActiveRecord::RecordNotFound
+			render json: { errors: 'Item not found' }, status: :not_found
+		end
 	end
 
 	def order_item_params

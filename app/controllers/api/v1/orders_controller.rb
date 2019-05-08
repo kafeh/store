@@ -2,7 +2,7 @@ class Api::V1::OrdersController < ApplicationController
 	include Orderable
 
 	before_action :user_authorize_request, only: [:buy, :show, :destroy]
-	before_action :set_order_by_user, only: [:buy, :show, :destroy]
+	before_action :set_order, only: [:buy, :show, :destroy]
 
 	def show
 		render json: @order, status: :ok
@@ -29,16 +29,12 @@ class Api::V1::OrdersController < ApplicationController
 
 	private
 
-	def set_order_by_user
-		if @current_user.orders.active.any?
-			@order = @current_user.orders.active.first
-		else
-			@order = @current_user.orders.create
-		end
-	end
-
 	def set_order
-		@order = Order.find(params[:id])
+		begin
+			@order = @current_user.orders.active.first!
+		rescue ActiveRecord::RecordNotFound
+			render json: { errors: 'Order not found' }, status: :not_found
+		end
 	end
 
 end
