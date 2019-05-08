@@ -1,8 +1,8 @@
 class Api::V1::OrderItemsController < ApplicationController
-	before_action :user_authorize_request, only: [:create, :destroy]
+	before_action :user_authorize_request, only: [:create, :update, :destroy]
 
-	before_action :set_order_by_user, only: [:create]
-	before_action :set_order_item, only: [:destroy]
+	before_action :set_order, only: [:create]
+	before_action :set_order_item, only: [:update, :destroy]
 
 	def create
 		order_item = @order.order_items.new(order_item_params)
@@ -17,6 +17,14 @@ class Api::V1::OrderItemsController < ApplicationController
 		end
 	end
 
+	def update
+		if @order_item.update(order_item_update_params)
+			render json: @order_item, status: :ok
+		else
+			render json: { errors: @order_item.errors }, status: :unprocessable_entity
+		end
+	end
+
 	def destroy
 		@order_item.destroy!
 		head :no_content
@@ -24,7 +32,7 @@ class Api::V1::OrderItemsController < ApplicationController
 
 	private
 
-	def set_order_by_user
+	def set_order
 		if @current_user.orders.active.any?
 			@order = @current_user.orders.active.first
 		else
@@ -32,16 +40,16 @@ class Api::V1::OrderItemsController < ApplicationController
 		end
 	end
 
-	def set_order
-		@order = Order.find(params[:id])
-	end
-
 	def set_order_item
-		@order_item = OrderItem.find(params[:order_item_id])
+		@order_item = OrderItem.find(params[:id])
 	end
 
 	def order_item_params
 		params.require(:order_item).permit(:product_id, :quantity)
+	end	
+
+	def order_item_update_params
+		params.require(:order_item).permit(:quantity)
 	end
 
 end

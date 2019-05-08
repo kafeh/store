@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         end
       end  
 
-      resources :order_items, only: [:create, :destroy]    
+      resources :order_items, only: [:create, :destroy, :update]    
     end
   end
 
