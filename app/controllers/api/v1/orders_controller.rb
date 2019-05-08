@@ -6,18 +6,26 @@ class Api::V1::OrdersController < ApplicationController
 	before_action :set_order, only: [:buy, :show, :destroy]
 	before_action :set_order_by_id, only: [:log]
 
+	# GET /orders/:id
+
 	def show
 		render json: {"order": @order, "items": @order.order_items}, status: :ok
 	end
+
+	# GET /orders/:id/log
 
 	def log
 		render json: { "order": @order, "items": @order.order_items, "user": @order.user }, status: :ok
 	end
 
+	# DELETE /orders/:id
+
 	def destroy
 		@order.destroy
 		head :no_content
 	end
+
+	# PATCH /orders/:id
 
 	def buy
 		if @order.order_items.any?

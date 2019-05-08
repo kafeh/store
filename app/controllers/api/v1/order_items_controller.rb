@@ -4,6 +4,8 @@ class Api::V1::OrderItemsController < ApplicationController
 	before_action :set_order, only: [:create]
 	before_action :set_order_item, only: [:update, :destroy]
 
+	# POST /order_items
+
 	def create
 		order_item = @order.order_items.new(order_item_params)
 		if order_item.check_stock
@@ -17,6 +19,8 @@ class Api::V1::OrderItemsController < ApplicationController
 		end
 	end
 
+	# PATCH /order_items/:id
+
 	def update
 		if @order_item.order.status == "active"
 			if @order_item.update(order_item_update_params)
@@ -28,6 +32,8 @@ class Api::V1::OrderItemsController < ApplicationController
 			render json: { errors: "You cannot update this item" }, status: :unprocessable_entity
 		end
 	end
+
+	# DELETE /order_items/:id
 
 	def destroy
 		@order_item.destroy!

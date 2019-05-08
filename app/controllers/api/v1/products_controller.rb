@@ -5,14 +5,20 @@ class Api::V1::ProductsController < ApplicationController
 	before_action :user_authorize_request, only: [:add_like]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :add_like]
 
+	# GET /products
+
 	def index
 		products = Product.available.order(ordering_params(params)).paginate(page: params[:page], per_page: 20)
 		render json: products, status: :ok
 	end
 
+	# GET /products/:id
+
 	def show
 		render json: { "product": @product, "price": @product.get_price }, status: :ok
 	end
+
+	# POST /products
 
 	def create
 		product = Product.new(product_params)
@@ -23,6 +29,8 @@ class Api::V1::ProductsController < ApplicationController
 		end
 	end
 
+	# PATCH /products/:id
+
 	def update
 		if @product.update(product_params)
 			render json: @product, status: :ok
@@ -31,10 +39,14 @@ class Api::V1::ProductsController < ApplicationController
 		end
 	end
 
+	# DELETE /products/:id
+
 	def destroy
 		@product.destroy
 		head :no_content
 	end
+
+	# POST /products/:id/set_price
 
 	def set_price
 		price_product = @product.price_products.new(price_product_params)
@@ -45,10 +57,14 @@ class Api::V1::ProductsController < ApplicationController
 		end
 	end
 
+	# GET /products/search_by_name?name=""
+
 	def search_by_name
 		products = Product.available.order(ordering_params(params)).search_by_name(params[:name]).paginate(page: params[:page], per_page: 20)
 		render json: products, status: :ok
 	end
+
+	# GET /products/:id/add_like
 
 	def add_like
 		like = @product.like_products.new(user_id: @current_user.id)
