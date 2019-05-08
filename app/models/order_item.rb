@@ -16,6 +16,7 @@ class OrderItem < ApplicationRecord
 	belongs_to :product
 
 	before_create :set_total 
+	before_update :set_total 
 
 	def set_total
 		self.total = self.quantity * self.product.get_price
