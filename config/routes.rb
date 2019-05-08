@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :orders, only: [:show] do 
+      resources :orders, only: [:destroy, :show] do 
         collection do
           patch 'buy'
         end
