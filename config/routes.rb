@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         end
 
         collection do
-          get 'search_by_name/:name', to: 'products#search_by_name'
+          get 'search_by_name', to: 'products#search_by_name'
         end
       end
 

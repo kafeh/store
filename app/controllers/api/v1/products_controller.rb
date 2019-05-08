@@ -46,7 +46,7 @@ class Api::V1::ProductsController < ApplicationController
 	end
 
 	def search_by_name
-		products = Product.available.search_by_name(params[:name]).paginate(page: params[:page], per_page: 20).order('updated_at desc')
+		products = Product.available.order(ordering_params(params)).search_by_name(params[:name]).paginate(page: params[:page], per_page: 20)
 		render json: products, status: :ok
 	end
 
