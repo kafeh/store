@@ -1,7 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
 	include Orderable
 
-	before_action :admin_authorize_request, only: [:create, :destroy, :set_price]
+	before_action :admin_authorize_request, only: [:create, :destroy, :update, :set_price]
 	before_action :user_authorize_request, only: [:add_like]
 	before_action :set_product, only: [:show, :update, :destroy, :set_price, :get_price, :add_like]
 
