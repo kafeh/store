@@ -18,10 +18,14 @@ class Api::V1::OrderItemsController < ApplicationController
 	end
 
 	def update
-		if @order_item.update(order_item_update_params)
-			render json: @order_item, status: :ok
+		if @order_item.order.status == "active"
+			if @order_item.update(order_item_update_params)
+				render json: @order_item, status: :ok
+			else
+				render json: { errors: @order_item.errors }, status: :unprocessable_entity
+			end
 		else
-			render json: { errors: @order_item.errors }, status: :unprocessable_entity
+			render json: { errors: "You cannot update this item" }, status: :unprocessable_entity
 		end
 	end
 
