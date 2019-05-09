@@ -56,3 +56,25 @@ Now that you have everything setup in your API is time for deployment, you have 
 ```
 rails s
 ```
+# Sort
+With the symbols *+* and *-* you can order the records **descending** or **ascending**. The sorting can be by multiple fields separated by commas, for this, add the **_sort_** param follow by the field in your request.
+
+* Adding *-* will be order descending
+* Not adding a symbol will by order ascending
+
+### Example
+
+**Descending** by name, **Ascending** by likes.
+```
+/api/v1/products?sort=-name,likes
+```
+**Ascending** by name, **Descending** by likes.
+```
+/api/v1/products?sort=name,-likes
+```
+
+# Pagination
+Add the **_page_** param follow by the number of page you want to retrieve in your request.
+```
+/api/v1/products?page=2&&sort=name,-likes
+```
