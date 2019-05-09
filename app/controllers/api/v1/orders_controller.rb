@@ -2,6 +2,7 @@ class Api::V1::OrdersController < ApplicationController
 	include Orderable
 
 	before_action :user_authorize_request, only: [:buy, :show, :destroy]
+	before_action :admin_authorize_request, only: [:show]
 	before_action :admin_authorize_request, only: [:log]
 	before_action :set_order, only: [:buy, :show, :destroy]
 	before_action :set_order_by_id, only: [:log]
@@ -9,7 +10,7 @@ class Api::V1::OrdersController < ApplicationController
 	# GET /orders/:id
 
 	def show
-		render json: {"order": @order, "items": @order.order_items}, status: :ok
+		render json: {"order": @order, "items": @order.order_items, "user": @order.user}, status: :ok
 	end
 
 	# GET /orders/:id/log
