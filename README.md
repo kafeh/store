@@ -61,9 +61,11 @@ With the symbols *+* and *-* you can order the records **descending** or **ascen
 
 * Adding *-* will be order descending
 * Not adding a symbol will by order ascending
-
+### Url Params
+```
+sort=[value] or sort=[-value]
+```
 ### Example
-
 **Descending** by name, **Ascending** by likes.
 ```
 /api/v1/products?sort=-name,likes
@@ -75,11 +77,245 @@ With the symbols *+* and *-* you can order the records **descending** or **ascen
 
 # Pagination
 Add the **_page_** param follow by the number of page you want to retrieve in your request.
+### Url Params
+```
+page=[value]
+```
+### Example
 ```
 /api/v1/products?page=2&&sort=name,-likes
 ```
 # Search by Name
 Add the **_name_** param follow by the name of the product
+### Url
+```/api/v1/products/search_by_name```
+### Url Params
+```
+name=[value]
+```
+### Example
 ```
 /api/v1/products/search_by_name?name=cinnamon
 ```
+## Login as User
+### Url
+```
+/users/auth/login
+```
+### Method
+`POST`
+### Data Params
+```
+{
+	"email":  [email],
+	"password": [password]
+}
+```
+
+## Login as Admin
+### Url
+```
+/admins/auth/login
+```
+### Method
+`POST`
+### Data Params
+```
+{
+	"email":  [email],
+	"password": [password]
+}
+```
+
+# Create Product
+### Url
+```
+/api/v1/products
+```
+### Method
+`POST`
+
+### Data Params
+```
+{
+	"name": [name]
+	"product_type_id": [product_type_id],
+	"stock": [stock]
+}
+```
+
+# Destroy a Product
+### Url
+```
+/api/v1/products/:id
+```
+### Method
+`DELETE`
+
+### Url Params
+```
+id=[value]
+```
+
+# Update Product
+### Url
+```
+/api/v1/products/:id
+```
+### Method
+`PATCH`
+### Url Params
+```
+id=[value]
+```
+### Data Params
+```
+{
+	"name": [name]
+	"product_type_id": [product_type_id],
+	"stock": [stock]
+}
+```
+
+# Add Like
+### Url
+```
+/api/v1/products/:id/add_like
+```
+### Method
+`GET`
+### Url Params
+```
+id=[value]
+```
+
+# Modify Price
+### Url
+```
+/api/v1/products/:id/set_price
+```
+### Method
+`POST`
+### Url Params
+```
+id=[value]
+```
+### Data Params
+```
+{
+"price_product": {	
+	"price": [price]
+	}
+}
+```
+# Product List
+### Url
+```
+/api/v1/products
+```
+### Method
+`GET`
+
+# Show Product
+### Url
+```
+/api/v1/products/:id
+```
+### Method
+`GET`
+### Url Params
+```
+id=[value]
+```
+
+# Add Item to Order
+### Url
+```
+/api/v1/order_items/
+```
+### Method
+`POST`
+### Data Params
+```
+{
+ "order_item": {
+ 	"product_id": [product_id],
+	"quantity": [quantity]
+	}
+}
+```
+
+# Remove Item from Order
+### Url
+```
+/api/v1/order_items/:id
+```
+### Method
+`DELETE`
+### Url Params
+```
+id=[value]
+```
+
+# Update quantity of Item
+### Url
+```
+/api/v1/order_items/:id
+```
+### Method
+`PATCH`
+### Url Params
+```
+id=[value]
+```
+### Data Params
+```
+{
+	"quantity": [quantity]
+}
+```
+
+# Buy
+### Url
+```
+/api/v1/orders/buy
+```
+### Method
+`PATCH`
+
+# Show Order Log to Admin
+### Url
+```
+api/v1/orders/:id/log
+```
+### Method
+`GET`
+### Url Params
+```
+id=[value]
+```
+
+# Show User Log to Admin
+### Url
+```
+/api/v1/orders/:id
+```
+### Method
+`GET`
+### Url Params
+```
+id=[value]
+```
+
+# Destroy Order
+### Url
+```
+/api/v1/orders/:id
+```
+### Method
+`DELETE`
+### Url Params
+```
+id=[value]
+```
+
