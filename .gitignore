@@ -31,7 +31,7 @@
 /vendor/bundle
 
 # Data Base settings
-/config/database.yml
+# /config/database.yml
 
 /db/schema.rb
 .rbenv-vars
