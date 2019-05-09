@@ -78,3 +78,8 @@ Add the **_page_** param follow by the number of page you want to retrieve in yo
 ```
 /api/v1/products?page=2&&sort=name,-likes
 ```
+# Search by Name
+Add the **_name_** param follow by the name of the product
+```
+/api/v1/products/search_by_name?name=cinnamon
+```
