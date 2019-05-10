@@ -56,6 +56,11 @@ Now that you have everything setup in your API is time for deployment, you have 
 ```
 rails s
 ```
+# Authentication
+Users and Admins need to get a **_token_** and put it on the header with **_Authorization_** as key for access to some request.
+
+The token is obtained by login either as a user or as an administrator and it will be expired after 24 hour.
+
 # Sort
 With the symbols *+* and *-* you can order the records **descending** or **ascending**. The sorting can be by multiple fields separated by commas, for this add the **_sort_** param follow by the field in your request.
 
