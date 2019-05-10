@@ -297,7 +297,7 @@ api/v1/orders/:id/log
 id=[value]
 ```
 
-# Show User Log to Admin
+# Show Order Log to User
 ### Url
 ```
 /api/v1/orders/:id
