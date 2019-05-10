@@ -57,7 +57,7 @@ Now that you have everything setup in your API is time for deployment, you have 
 rails s
 ```
 # Sort
-With the symbols *+* and *-* you can order the records **descending** or **ascending**. The sorting can be by multiple fields separated by commas, for this, add the **_sort_** param follow by the field in your request.
+With the symbols *+* and *-* you can order the records **descending** or **ascending**. The sorting can be by multiple fields separated by commas, for this add the **_sort_** param follow by the field in your request.
 
 * Adding *-* will be order descending
 * Not adding a symbol will by order ascending
@@ -107,8 +107,8 @@ name=[value]
 ### Data Params
 ```
 {
-	"email":  [email],
-	"password": [password]
+   "email":  [email],
+   "password": [password]
 }
 ```
 
@@ -122,12 +122,12 @@ name=[value]
 ### Data Params
 ```
 {
-	"email":  [email],
-	"password": [password]
+   "email":  [email],
+   "password": [password]
 }
 ```
 
-# Create Product
+# Create a Product
 ### Url
 ```
 /api/v1/products
@@ -138,9 +138,9 @@ name=[value]
 ### Data Params
 ```
 {
-	"name": [name]
-	"product_type_id": [product_type_id],
-	"stock": [stock]
+   "name": [name]
+   "product_type_id": [product_type_id],
+   "stock": [stock]
 }
 ```
 
@@ -157,7 +157,7 @@ name=[value]
 id=[value]
 ```
 
-# Update Product
+# Update a Product
 ### Url
 ```
 /api/v1/products/:id
@@ -171,13 +171,13 @@ id=[value]
 ### Data Params
 ```
 {
-	"name": [name]
-	"product_type_id": [product_type_id],
-	"stock": [stock]
+   "name": [name]
+   "product_type_id": [product_type_id],
+   "stock": [stock]
 }
 ```
 
-# Add Like
+# Add Like to Product
 ### Url
 ```
 /api/v1/products/:id/add_like
@@ -189,7 +189,7 @@ id=[value]
 id=[value]
 ```
 
-# Modify Price
+# Modify a Price of Product
 ### Url
 ```
 /api/v1/products/:id/set_price
@@ -202,10 +202,10 @@ id=[value]
 ```
 ### Data Params
 ```
-{
-"price_product": {	
-	"price": [price]
-	}
+{  
+   "price_product":{  
+      "price": [price]
+   }
 }
 ```
 # Product List
@@ -237,14 +237,13 @@ id=[value]
 `POST`
 ### Data Params
 ```
-{
- "order_item": {
- 	"product_id": [product_id],
-	"quantity": [quantity]
-	}
+{  
+   "order_item":{  
+      "product_id": [product_id],
+      "quantity": [quantity]
+   }
 }
 ```
-
 # Remove Item from Order
 ### Url
 ```
@@ -271,11 +270,14 @@ id=[value]
 ### Data Params
 ```
 {
-	"quantity": [quantity]
+   "quantity": [quantity]
 }
 ```
 
-# Buy
+# Buy Items
+**Important** 
+User can only have one **_active_** Order, it will be change to **_finished_** once the User buy Items.
+
 ### Url
 ```
 /api/v1/orders/buy
