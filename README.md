@@ -97,7 +97,7 @@ name=[value]
 ```
 /api/v1/products/search_by_name?name=cinnamon
 ```
-## Login as User
+# Login as User
 ### Url
 ```
 /users/auth/login
@@ -275,7 +275,7 @@ id=[value]
 ```
 
 # Buy Items
-**Important** 
+**Important** <br>
 User can only have one **_active_** Order, it will be change to **_finished_** once the User buy Items.
 
 ### Url
